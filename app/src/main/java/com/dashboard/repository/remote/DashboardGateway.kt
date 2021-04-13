@@ -1,6 +1,7 @@
 package com.dashboard.repository.remote
 
 import com.dashboard.model.domain.Articles
+import com.dashboard.model.domain.Categories
 import com.dashboard.model.domain.Sources
 import retrofit2.Response
 import retrofit2.http.GET
@@ -24,7 +25,7 @@ interface DashboardGateway {
     fun category(@Path("category") category: String): Response<Articles>
 
     @GET("/categories")
-    fun categories(): Response<List<String>>
+    fun categories(): Response<Categories>
 
     @GET("/nexo")
     fun nexo(): Response<Articles>
