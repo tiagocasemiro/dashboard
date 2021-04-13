@@ -1,5 +1,6 @@
 package com.dashboard.model.domain
 
+import com.dashboard.repository.remote.DomainMapperResponse
 import com.google.gson.annotations.SerializedName
 
 data class Article (
@@ -17,4 +18,8 @@ data class Articles (
     @SerializedName("status") val status : String,
     @SerializedName("totalResults") val totalResults : Int,
     @SerializedName("articles") val articles : List<Article>
-)
+): DomainMapperResponse<Articles> {
+    override fun mapToDomain(): Articles {
+        return this
+    }
+}
