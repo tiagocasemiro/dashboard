@@ -1,9 +1,10 @@
-package com.dashboard
+package com.dashboard.view
 
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import com.dashboard.R
 
 val firaSansFamily = FontFamily(
     Font(R.font.firasans_light, FontWeight.Light),
