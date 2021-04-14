@@ -3,12 +3,13 @@
     package="com.dashboard">
 
     <application
-        android:allowBackup="true"
+        android:name=".configurations.DashboardApplication"
+        android:allowBackup="false"
         android:icon="@drawable/ic_dashboard"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dashboard">
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
