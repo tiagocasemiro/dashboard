@@ -2,4 +2,8 @@
     <string name="app_name">Dashboard</string>
 
     <string name="search_screen_title">Search</string>
+
+
+    <string name="content_description_back_button">Botão voltar</string>
+    <string name="content_description_search_button">Botão procurar</string>
 </resources>
