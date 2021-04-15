@@ -1,20 +1,23 @@
 package com.dashboard.view.screen
 
-import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.navigation.compose.navigate
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.navigate
 import com.dashboard.R
+import com.dashboard.view.components.TopBar
 import com.dashboard.view.firaSansFamily
 
 @Composable
@@ -54,21 +57,3 @@ fun RowListText(messages: List<String>) {
     }
 }
 
-@Composable
-fun TopBar(@StringRes title: Int) {
-    TopAppBar(
-        title = {
-            Text(
-                stringResource(id = title),
-                fontFamily = firaSansFamily,
-                fontSize = 30.sp,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentWidth(),
-                fontWeight = FontWeight.Bold
-            )
-        },
-        backgroundColor = colorResource(id = R.color.white),
-        contentColor = colorResource(id = R.color.black)
-    )
-}
