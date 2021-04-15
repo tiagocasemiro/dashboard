@@ -21,7 +21,7 @@ import com.dashboard.R
 import com.dashboard.view.firaSansFamily
 
 @Composable
-fun TopBar(@StringRes title: Int) {
+fun TopBarWithSearch(@StringRes title: Int, onSearch: () -> Unit) {
     TopAppBar(
         title = {
             Text(
@@ -34,6 +34,15 @@ fun TopBar(@StringRes title: Int) {
                 fontWeight = FontWeight.Bold
             )
         },
+        actions = {
+            IconButton(onClick = onSearch) {
+                Icon(
+                    imageVector = Icons.Filled.Search,
+                    contentDescription = stringResource(id = R.string.content_description_search_button),
+                    tint = colorResource(id = R.color.black)
+                )
+            }
+        },
         backgroundColor = colorResource(id = R.color.white),
         contentColor = colorResource(id = R.color.black),
         elevation = 0.dp
@@ -41,7 +50,7 @@ fun TopBar(@StringRes title: Int) {
 }
 
 @Composable
-fun TopBarBackAndFindButtons(@StringRes title: Int, onBack: () -> Unit, onSearch: () -> Unit) {
+fun TopBarWithBack(@StringRes title: Int, onBack: () -> Unit) {
     TopAppBar(
         title = {
             Text(
@@ -61,15 +70,6 @@ fun TopBarBackAndFindButtons(@StringRes title: Int, onBack: () -> Unit, onSearch
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     contentDescription = stringResource(id = R.string.content_description_back_button),
-                    tint = colorResource(id = R.color.black)
-                )
-            }
-        },
-        actions = {
-            IconButton(onClick = onSearch) {
-                Icon(
-                    imageVector = Icons.Filled.Search,
-                    contentDescription = stringResource(id = R.string.content_description_search_button),
                     tint = colorResource(id = R.color.black)
                 )
             }
