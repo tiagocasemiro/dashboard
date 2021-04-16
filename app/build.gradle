@@ -82,4 +82,8 @@ dependencies {
     /* Mockk to mock objects on tests */
     testImplementation "io.mockk:mockk:1.10.0"
     androidTestImplementation "io.mockk:mockk-android:1.9.3"
+
+    /* Image loader */
+    implementation "io.coil-kt:coil:1.2.0"
+    implementation "com.google.accompanist:accompanist-coil:0.7.1"
 }
