@@ -1,12 +1,15 @@
 package com.dashboard.configurations
 
+import androidx.lifecycle.viewModelScope
 import com.dashboard.BuildConfig
 import com.dashboard.model.usecase.MainPageUseCase
 import com.dashboard.repository.DashboardRemoteRepository
 import com.dashboard.repository.implementation.DashboardRemoteRepositoryImplementation
 import com.dashboard.repository.remote.DashboardGateway
+import com.dashboard.view.screen.cover.CoverViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -45,5 +48,18 @@ var retrofitModule = module {
     }
     factory<DashboardRemoteRepository> {
         DashboardRemoteRepositoryImplementation(get())
+    }
+    factory {
+        TaskExecutor()
+    }
+    viewModel {
+        val task: TaskExecutor = get()
+        val coverViewModel = CoverViewModel(
+            repository = get(),
+            task = task
+        )
+        task.with(coverViewModel.viewModelScope)
+
+        coverViewModel
     }
 }
