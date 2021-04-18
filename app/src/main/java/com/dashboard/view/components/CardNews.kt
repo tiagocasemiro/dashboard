@@ -3,32 +3,26 @@ package com.dashboard.view.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.Alignment.Companion.CenterStart
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
-import com.dashboard.R
 import com.dashboard.model.domain.Article
+import com.dashboard.model.domain.Source
 import com.dashboard.view.firaSansFamily
 import com.google.accompanist.coil.CoilImage
-import com.google.accompanist.glide.GlideImage
 
 @Composable
 fun MainCardNews(article: Article?) {
@@ -110,6 +104,37 @@ fun MainCardNews(article: Article?) {
 
     }
 }
+
+@Composable
+fun RowListText(messages: List<String>) {
+    Column {
+        LazyRow(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),) {
+            items(messages) { message ->
+                Text(
+                    text = message,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = firaSansFamily,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+        }
+        DashboardDivider()
+    }
+}
+
+@Composable
+fun SourcesCard(sources: List<Source>) {
+    LazyRow {
+       items(sources) { source ->
+           Text(source.name)
+       }
+    }
+}
+
+
 
 @Preview
 @Composable
