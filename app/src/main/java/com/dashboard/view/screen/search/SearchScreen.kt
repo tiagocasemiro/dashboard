@@ -1,4 +1,4 @@
-package com.dashboard.view.screen
+package com.dashboard.view.screen.search
 
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -8,7 +8,7 @@ import com.dashboard.R
 import com.dashboard.view.components.TopBarWithBack
 
 @Composable
-fun SearchScreen(navController: NavController) {
+fun SearchScreen(navController: NavController, viewModel: SearchViewModel) {
     Scaffold(
         topBar = {
             TopBarWithBack(R.string.search_screen_title,
