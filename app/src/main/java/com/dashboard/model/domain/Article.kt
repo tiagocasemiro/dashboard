@@ -12,7 +12,11 @@ data class Article (
     @SerializedName("urlToImage") val urlToImage : String? = null,
     @SerializedName("publishedAt") val publishedAt : String? = null,
     @SerializedName("content") val content : String? = null
-)
+): DomainMapperResponse<Article> {
+    override fun mapToDomain(): Article {
+        return this
+    }
+}
 
 data class Articles (
     @SerializedName("status") val status : String,

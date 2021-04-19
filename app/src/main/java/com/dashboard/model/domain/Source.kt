@@ -11,7 +11,11 @@ data class Source (
 	@SerializedName("category") val category : String? = null,
 	@SerializedName("language") val language : String? = null,
 	@SerializedName("country") val country : String? = null
-)
+): DomainMapperResponse<Source> {
+	override fun mapToDomain(): Source {
+		return this
+	}
+}
 
 data class Sources (
 	@SerializedName("status") val status : String,
