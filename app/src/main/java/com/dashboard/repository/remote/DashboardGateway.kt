@@ -10,29 +10,29 @@ import retrofit2.http.Query
 
 interface DashboardGateway {
     @GET("/headlines")
-    fun headlines(): Response<Articles>
+    suspend fun headlines(): Response<Articles>
 
     @GET("/headlines/source/{source}")
-    fun headlines(@Path("source") source: String): Response<Articles>
+    suspend fun headlines(@Path("source") source: String): Response<Articles>
 
     @GET("/sources")
-    fun sources(): Response<Sources>
+    suspend fun sources(): Response<Sources>
 
     @GET("/everything")
-    fun everything(@Query("query") query: String? = null): Response<Articles>
+    suspend fun everything(@Query("query") query: String? = null): Response<Articles>
 
     @GET("/category/{category}")
-    fun category(@Path("category") category: String): Response<Articles>
+    suspend fun category(@Path("category") category: String): Response<Articles>
 
     @GET("/categories")
-    fun categories(): Response<Categories>
+    suspend fun categories(): Response<Categories>
 
     @GET("/nexo")
-    fun nexo(): Response<Articles>
+    suspend fun nexo(): Response<Articles>
 
     @GET("/the-intercept-brazil")
-    fun theInterceptBrazil(): Response<Articles>
+    suspend fun theInterceptBrazil(): Response<Articles>
 
     @GET("/tech-mundo")
-    fun techMundo(): Response<Articles>
+    suspend fun techMundo(): Response<Articles>
 }
