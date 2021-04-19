@@ -25,13 +25,13 @@ import com.dashboard.view.firaSansFamily
 import com.google.accompanist.coil.CoilImage
 
 @Composable
-fun MainCardNews(article: Article?) {
+fun MainCardNews(article: Article) {
     Column(
         Modifier.padding(dashboardPadding)
     ) {
         CoilImage(
-            data = "https://cloudfront-eu-central-1.images.arcpublishing.com/prisa/S5PYKVUYINH75JL745EPPSXF3E.jpg",
-            contentDescription = "description of the image",
+            data = article.urlToImage?:"",
+            contentDescription = "Image from article",
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp),
@@ -43,7 +43,7 @@ fun MainCardNews(article: Article?) {
                 Box(Modifier.matchParentSize()) {
                     Image(
                         ColorPainter(Color.Gray),
-                        contentDescription = "description of the image",
+                        contentDescription = "Load image",
                         modifier = Modifier.clip(shape = RoundedCornerShape(20f)),
                     )
                 }
@@ -52,7 +52,7 @@ fun MainCardNews(article: Article?) {
                 Box(Modifier.matchParentSize()) {
                     Image(
                         ColorPainter(Color.Gray),
-                        contentDescription = "description of the image",
+                        contentDescription = "Error image",
                         modifier = Modifier.clip(shape = RoundedCornerShape(20f)),
                     )
                 }
@@ -61,7 +61,7 @@ fun MainCardNews(article: Article?) {
         )
         DashboardSpace()
         Text(
-            text = "Bloomberg",
+            text = article.source?.name?:"",
             fontSize = 18.sp,
             fontWeight = FontWeight.Light,
             fontFamily = firaSansFamily,
@@ -69,7 +69,7 @@ fun MainCardNews(article: Article?) {
         )
         DashboardSpace()
         Text(
-            "A confirmação da anulação das condenações de Lula na Lava Jato",
+            article.title?:"",
             fontFamily = firaSansFamily,
             fontSize = 30.sp,
             modifier = Modifier
@@ -90,7 +90,7 @@ fun MainCardNews(article: Article?) {
             DashboardDot()
             DashboardSpace()
             Text(
-                text = "1m ago",
+                text = article.publishedAt?:"",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Light,
                 fontFamily = firaSansFamily,
@@ -142,7 +142,7 @@ fun Preview() {
     Column(
         Modifier.background(Color.White)
     ) {
-        MainCardNews(null)
+       // MainCardNews(null)
 
     }
 }
