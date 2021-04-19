@@ -13,7 +13,7 @@ import com.dashboard.view.screen.cover.CoverScreen
 import com.dashboard.view.screen.search.SearchScreen
 import com.dashboard.view.screen.cover.CoverViewModel
 import com.dashboard.view.screen.search.SearchViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 //https://www.behance.net/gallery/85077173/Sector-News
 //https://github.com/android/compose-samples/tree/master/JetNews
