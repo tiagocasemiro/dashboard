@@ -61,8 +61,11 @@ dependencies {
 
     /* Injetor de dependencias */
     implementation 'org.koin:koin-android:2.1.6'
-    implementation 'org.koin:koin-android-viewmodel:2.0.1'
     androidTestImplementation 'org.koin:koin-test:2.0.1'
+    implementation "org.koin:koin-core:2.1.6"
+    implementation "org.koin:koin-androidx-viewmodel:2.1.6"
+    implementation 'org.koin:koin-androidx-scope:2.1.6'
+    implementation "org.koin:koin-android-architecture:0.9.3"
 
     /* Comunicacao http e conversao de json */
     implementation "com.squareup.okhttp3:okhttp:4.3.1"
