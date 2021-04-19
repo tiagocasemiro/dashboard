@@ -10,7 +10,7 @@ class DashboardApplication: Application() {
         super.onCreate()
         startKoin {
             androidContext(this@DashboardApplication)
-            modules(listOf(retrofitModule))
+            modules(listOf(retrofitModule, viewModelModule, repositoryModule, useCaseModule))
         }
     }
 }
