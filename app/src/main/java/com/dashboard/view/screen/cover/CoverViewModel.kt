@@ -9,12 +9,21 @@ import com.dashboard.repository.remote.onSuccess
 
 class CoverViewModel(private val repository: DashboardRemoteRepository, private val task: TaskExecutor): ViewModel() {
 
-   fun article(onSuccess: (List<Article>) -> Unit, onError: (String?) -> Unit) = task.exec {
+   fun article(onResult: (CoverState) -> Unit) = task.exec {
        val result = task.async { repository.headlines() }
        result?.onSuccess {
-           onSuccess(it.articles)
+           if(it.articles.isEmpty())
+                onResult(CoverState.Empty)
+           else
+                onResult(CoverState.Data(it.articles))
        }?.onFailure {
-           onError(it?.message)
+           onResult(CoverState.Error(it?.message?:""))
        }
    }
+}
+
+sealed class CoverState {
+    object Empty : CoverState()
+    class Error(val message: String) : CoverState()
+    class Data(val articles: List<Article>) : CoverState()
 }
