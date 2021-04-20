@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -23,8 +24,12 @@ import com.dashboard.view.components.*
 @Composable
 fun CoverScreen(navController: NavController, viewModel: CoverViewModel) {
     val stateArticles: MutableState<CoverState> = remember { mutableStateOf(CoverState.Empty) }
+    var articles: List<Article>? = null
     viewModel.article {
         stateArticles.value = it
+        if(it is CoverState.Data) {
+            articles = it.articles
+        }
     }
     Scaffold(
         topBar = {
@@ -37,8 +42,7 @@ fun CoverScreen(navController: NavController, viewModel: CoverViewModel) {
             RowListText(listOf("Política", "Esporte", "Cinema", "Lazer", "Política", "Esporte","Cinema", "Lazer"))
             when(stateArticles.value) {
                 is CoverState.Data -> {
-                    val state = stateArticles.value as State<CoverState.Data>
-                    CoverNews(state.value.articles, listOf())
+                    CoverNews(articles!!, listOf())
                 }
                 is CoverState.Empty -> {
                     CoverEmpty()
@@ -57,8 +61,10 @@ fun CoverNews(articles: List<Article>, sources: List<Source>) {
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        items(articles) { article ->
+        itemsIndexed(articles) { index, article ->
             MainCardNews(article)
+            if (index < articles.size - 1)
+                DashboardDivider()
         }
         item {
             SourcesCard(sources)
