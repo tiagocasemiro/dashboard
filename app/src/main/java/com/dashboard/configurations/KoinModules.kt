@@ -36,8 +36,6 @@ var retrofitModule = module {
                     })
                     .addInterceptor(object: Interceptor {
                         override fun intercept(chain: Interceptor.Chain): Response {
-                            println("*** -> " + chain.request().url.encodedPath)
-
                             return chain.proceed(chain.request())
                         }
                     })
