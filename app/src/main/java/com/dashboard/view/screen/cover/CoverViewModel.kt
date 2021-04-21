@@ -24,6 +24,7 @@ class CoverViewModel(private val repository: DashboardRemoteRepository, private 
 
 sealed class CoverState {
     object Empty : CoverState()
+    object Load : CoverState()
     class Error(val message: String) : CoverState()
     class Data(val articles: List<Article>) : CoverState()
 }
