@@ -9,15 +9,14 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.asFlow
 import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
 import com.dashboard.R
@@ -25,16 +24,11 @@ import com.dashboard.model.domain.Article
 import com.dashboard.model.domain.Source
 import com.dashboard.view.components.*
 
+
 @Composable
 fun CoverScreen(navController: NavController, viewModel: CoverViewModel) {
-    val stateArticles: MutableState<CoverState> = remember { mutableStateOf(CoverState.Load) }
-    var articles: List<Article>? = null
-    viewModel.article {
-        stateArticles.value = it
-        if(it is CoverState.Data) {
-            articles = it.articles
-        }
-    }
+    val stateArticles: State<CoverState> = viewModel.stateArticles.observeAsState(CoverState.Load)
+    viewModel.articles()
     Scaffold(
         topBar = {
             TopBarWithSearch(R.string.app_name, onSearch = {
@@ -46,7 +40,7 @@ fun CoverScreen(navController: NavController, viewModel: CoverViewModel) {
             RowListText(listOf("Política", "Esporte", "Cinema", "Lazer", "Política", "Esporte","Cinema", "Lazer"))
             when(stateArticles.value) {
                 is CoverState.Data -> {
-                    CoverNews(articles!!, listOf())
+                    CoverNews(stateArticles.value as CoverState.Data, listOf())
                 }
                 is CoverState.Empty -> {
                     CoverEmpty()
@@ -63,14 +57,14 @@ fun CoverScreen(navController: NavController, viewModel: CoverViewModel) {
 }
 
 @Composable
-fun CoverNews(articles: List<Article>, sources: List<Source>) {
+fun CoverNews(articleState: CoverState.Data, sources: List<Source>) {
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        itemsIndexed(articles) { index, article ->
+        itemsIndexed(articleState.articles) { index, article ->
             MainCardNews(article)
-            if (index < articles.size - 1)
+            if (index < articleState.articles.size - 1)
                 DashboardDivider()
         }
         item {
