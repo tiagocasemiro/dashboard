@@ -134,8 +134,6 @@ fun SourcesCard(sources: List<Source>) {
     }
 }
 
-
-
 @Preview
 @Composable
 fun Preview() {
