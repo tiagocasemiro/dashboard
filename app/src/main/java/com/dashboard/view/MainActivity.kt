@@ -18,6 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 //https://www.behance.net/gallery/85077173/Sector-News
 //https://github.com/android/compose-samples/tree/master/JetNews
 //https://github.com/google/accompanist
+//https://sheltered-dawn-75915.herokuapp.com/swagger-ui/index.html?url=/openapi.json
 class MainActivity: ComponentActivity() {
     private val coverViewModel: CoverViewModel by viewModel()
     private val searchViewModel: SearchViewModel by viewModel()
