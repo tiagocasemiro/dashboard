@@ -22,6 +22,8 @@ import androidx.navigation.compose.navigate
 import com.dashboard.R
 import com.dashboard.model.domain.Source
 import com.dashboard.view.components.*
+import com.dashboard.view.defaultPaddingCard
+import com.dashboard.view.defaultSpaceBetweenCard
 
 
 @Composable
@@ -39,7 +41,7 @@ fun CoverScreen(navController: NavController, viewModel: CoverViewModel) {
             RowListText(listOf("Política", "Esporte", "Cinema", "Lazer", "Política", "Esporte","Cinema", "Lazer"))
             when(stateArticles.value) {
                 is CoverState.Data -> {
-                    CoverNews(stateArticles.value as CoverState.Data, listOf())
+                    CoverNews(stateArticles.value as CoverState.Data)
                 }
                 is CoverState.Empty -> {
                     CoverEmpty()
@@ -56,18 +58,21 @@ fun CoverScreen(navController: NavController, viewModel: CoverViewModel) {
 }
 
 @Composable
-fun CoverNews(articleState: CoverState.Data, sources: List<Source>) {
+fun CoverNews(articleState: CoverState.Data) {
     LazyColumn(
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(horizontal = defaultPaddingCard, vertical = defaultPaddingCard),
+        verticalArrangement = Arrangement.spacedBy(defaultSpaceBetweenCard),
     ) {
         itemsIndexed(articleState.articles) { index, article ->
-            MainCardNews(article)
+            if(index == 0) {
+                MainCardNews(article)
+                DashboardDivider()
+                SourcesCard(articleState.sources)
+            } else {
+                SecondaryCardNews(article)
+            }
             if (index < articleState.articles.size - 1)
                 DashboardDivider()
-        }
-        item {
-            SourcesCard(sources)
         }
     }
 }
