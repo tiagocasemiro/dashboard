@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dashboard.configurations.TaskExecutor
 import com.dashboard.model.domain.Article
+import com.dashboard.model.domain.Source
 import com.dashboard.repository.DashboardRemoteRepository
 import com.dashboard.repository.remote.onFailure
 import com.dashboard.repository.remote.onSuccess
@@ -19,7 +20,7 @@ class CoverViewModel(private val repository: DashboardRemoteRepository, private 
            if(it.articles.isEmpty())
                _stateArticles.value = CoverState.Empty
            else
-               _stateArticles.value = CoverState.Data(it.articles)
+               _stateArticles.value = CoverState.Data(it.articles, listOf(Source(name ="Globo"), Source(name ="Band"), Source(name ="Nexo")))
        }?.onFailure {
            _stateArticles.value = CoverState.Error(it?.message?:"")
        }
@@ -30,5 +31,5 @@ sealed class CoverState {
     object Empty : CoverState()
     object Load : CoverState()
     class Error(val message: String) : CoverState()
-    class Data(val articles: List<Article>) : CoverState()
+    class Data(val articles: List<Article>, val sources: List<Source>) : CoverState()
 }
