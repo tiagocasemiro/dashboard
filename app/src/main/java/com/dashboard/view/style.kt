@@ -4,7 +4,12 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import com.dashboard.R
+
+val dashboardPadding = 15.dp
+val defaultPaddingCard = 8.dp
+val defaultSpaceBetweenCard = 8.dp
 
 val firaSansFamily = FontFamily(
     Font(R.font.firasans_light, FontWeight.Light),
