@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
@@ -115,36 +114,38 @@ fun SecondaryCardNews(article: Article) {
             .wrapContentHeight(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        CoilImage(
-            data = article.urlToImage?:"",
-            contentDescription = "Image from article",
-            modifier = Modifier
-                .height(90.dp)
-                .width(90.dp),
-            contentScale = ContentScale.Crop,
-            requestBuilder = {
-                transformations(RoundedCornersTransformation(20f))
-            },
-            loading = {
-                Box(Modifier.matchParentSize()) {
-                    Image(
-                        ColorPainter(Color.Gray),
-                        contentDescription = "Load image",
-                        modifier = Modifier.clip(shape = RoundedCornerShape(20f)),
-                    )
-                }
-            },
-            error = {
-                Box(Modifier.matchParentSize()) {
-                    Image(
-                        ColorPainter(Color.Gray),
-                        contentDescription = "Error image",
-                        modifier = Modifier.clip(shape = RoundedCornerShape(20f)),
-                    )
-                }
-            },
-            fadeIn = true
-        )
+        article.urlToImage?.let {
+            CoilImage(
+                data = it,
+                contentDescription = "Image from article",
+                modifier = Modifier
+                    .height(90.dp)
+                    .width(90.dp),
+                contentScale = ContentScale.Crop,
+                requestBuilder = {
+                    transformations(RoundedCornersTransformation(20f))
+                },
+                loading = {
+                    Box(Modifier.matchParentSize()) {
+                        Image(
+                            ColorPainter(Color.Gray),
+                            contentDescription = "Load image",
+                            modifier = Modifier.clip(shape = RoundedCornerShape(20f)),
+                        )
+                    }
+                },
+                error = {
+                    Box(Modifier.matchParentSize()) {
+                        Image(
+                            ColorPainter(Color.Gray),
+                            contentDescription = "Error image",
+                            modifier = Modifier.clip(shape = RoundedCornerShape(20f)),
+                        )
+                    }
+                },
+                fadeIn = true
+            )
+        }
         DashboardCustomSpace(defaultPaddingCard)
         Column {
             Text(
@@ -174,7 +175,7 @@ fun SecondaryCardNews(article: Article) {
                     color = Color.Blue
                 )
                 DashboardSpace()
-                DashboardDot()
+                DashboardShortDot()
                 DashboardSpace()
                 Text(
                     text = article.publishedAt?:"",
@@ -184,7 +185,7 @@ fun SecondaryCardNews(article: Article) {
                     color = Color.Gray
                 )
                 DashboardSpaceFullHorizontal {
-                    DashboardThreeVerticalDot()
+                    DashboardThreeVerticalShortDot()
                 }
             }
             DashboardShortSpace()
