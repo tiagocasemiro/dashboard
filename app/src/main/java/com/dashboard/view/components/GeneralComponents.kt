@@ -25,6 +25,14 @@ fun DashboardDot(){
 }
 
 @Composable
+fun DashboardShortDot(){
+    Canvas(modifier = Modifier.size(3.dp), onDraw = {
+        drawCircle(color = Color.Gray)
+    })
+}
+
+
+@Composable
 fun DashboardThreeVerticalDot() {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Canvas(modifier = Modifier.size(5.dp), onDraw = {
@@ -36,6 +44,23 @@ fun DashboardThreeVerticalDot() {
         })
         Spacer(modifier = Modifier.size(3.dp))
         Canvas(modifier = Modifier.size(5.dp), onDraw = {
+            drawCircle(color = Color.Gray)
+        })
+    }
+}
+
+@Composable
+fun DashboardThreeVerticalShortDot() {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Canvas(modifier = Modifier.size(3.dp), onDraw = {
+            drawCircle(color = Color.Gray)
+        })
+        Spacer(modifier = Modifier.size(2.dp))
+        Canvas(modifier = Modifier.size(3.dp), onDraw = {
+            drawCircle(color = Color.Gray)
+        })
+        Spacer(modifier = Modifier.size(2.dp))
+        Canvas(modifier = Modifier.size(3.dp), onDraw = {
             drawCircle(color = Color.Gray)
         })
     }
