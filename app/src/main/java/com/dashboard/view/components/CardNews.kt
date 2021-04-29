@@ -15,12 +15,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.transform.RoundedCornersTransformation
 import com.dashboard.model.domain.Article
 import com.dashboard.model.domain.Source
+import com.dashboard.view.Shapes
 import com.dashboard.view.dashboardPadding
 import com.dashboard.view.defaultPaddingCard
 import com.dashboard.view.firaSansFamily
@@ -215,17 +217,25 @@ fun RowListText(messages: List<String>) {
 
 @Composable
 fun RowListSources(messages: List<String>) {
-    Column {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         LazyRow(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),) {
             items(messages) { message ->
+                // todo Use chips android
                 Text(
                     text = message,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = firaSansFamily,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(color = Color.Black, shape = Shapes.medium)
+                        .padding(horizontal = 20.dp, vertical = 0.dp),
+                    color = Color.White,
+                    textAlign = TextAlign.Center
                 )
             }
         }
