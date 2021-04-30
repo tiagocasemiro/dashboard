@@ -225,6 +225,7 @@ fun RowListSources(messages: List<String>) {
             horizontalArrangement = Arrangement.spacedBy(16.dp),) {
             items(messages) { message ->
                 // todo Use chips android
+                //https://github.com/mitchtabian/MVVMRecipeApp/blob/chips/app/src/main/java/com/codingwithmitch/mvvmrecipeapp/presentation/components/FoodCategoryChip.kt
                 Text(
                     text = message,
                     fontSize = 20.sp,
