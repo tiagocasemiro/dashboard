@@ -11,6 +11,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -54,19 +55,30 @@ fun CoverScreen(navController: NavController, stateArticles: State<CoverState>) 
 
 @Composable
 fun CoverNews(articleState: CoverState.Data) {
+    val header = remember {
+        articleState.articles.first()
+    }
+    val articles = remember {
+        articleState.articles.toMutableList().filterIndexed { index, _ ->
+            index != 0
+        }
+    }
     LazyColumn(
         contentPadding = PaddingValues(horizontal = defaultPaddingCard, vertical = defaultPaddingCard),
         verticalArrangement = Arrangement.spacedBy(defaultSpaceBetweenCard),
     ) {
-        itemsIndexed(articleState.articles) { index, article ->
-            if(index == 0) {
-                MainCardNews(article)
-                DashboardDivider()
-                SourcesCard(articleState.sources)
-            } else {
-                SecondaryCardNews(article)
-            }
-            if (index < articleState.articles.size - 1)
+        item {
+            MainCardNews(header)
+            DashboardDivider()
+        }
+        item {
+            SourcesCard(articleState.sources)
+            DashboardSpace()
+            DashboardDivider()
+        }
+        itemsIndexed(articles) { index, article ->
+            SecondaryCardNews(article)
+            if (index < articles.size - 1)
                 DashboardDivider()
         }
     }
