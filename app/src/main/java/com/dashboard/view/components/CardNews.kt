@@ -8,6 +8,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,6 +29,7 @@ import com.dashboard.view.dashboardPadding
 import com.dashboard.view.defaultPaddingCard
 import com.dashboard.view.firaSansFamily
 import com.google.accompanist.coil.CoilImage
+import com.dashboard.R
 
 @Composable
 fun MainCardNews(article: Article) {
@@ -110,40 +113,35 @@ fun MainCardNews(article: Article) {
 
 @Composable
 fun SecondaryCardNews(article: Article) {
+    val size = remember { mutableStateOf(90.dp) }
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight(),
         verticalAlignment = Alignment.CenterVertically
     ) {
+
         article.urlToImage?.let {
             CoilImage(
                 data = it,
                 contentDescription = "Image from article",
                 modifier = Modifier
-                    .height(90.dp)
-                    .width(90.dp),
+                    .height(size.value)
+                    .width(size.value),
                 contentScale = ContentScale.Crop,
                 requestBuilder = {
                     transformations(RoundedCornersTransformation(20f))
                 },
                 loading = {
-                    Box(Modifier.matchParentSize()) {
-                        Image(
-                            ColorPainter(Color.Gray),
-                            contentDescription = "Load image",
-                            modifier = Modifier.clip(shape = RoundedCornerShape(20f)),
-                        )
-                    }
+                    Box(
+                        Modifier
+                            .matchParentSize()
+                            .clip(shape = RoundedCornerShape(20f))
+                            .background(color = Color.Gray))
                 },
                 error = {
-                    Box(Modifier.matchParentSize()) {
-                        Image(
-                            ColorPainter(Color.Gray),
-                            contentDescription = "Error image",
-                            modifier = Modifier.clip(shape = RoundedCornerShape(20f)),
-                        )
-                    }
+                    size.value = 0.dp
+                    Box(Modifier.wrapContentSize())
                 },
                 fadeIn = true
             )
@@ -165,7 +163,7 @@ fun SecondaryCardNews(article: Article) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentWidth(),
-                fontWeight = FontWeight.Medium
+                fontWeight = if(article.urlToImage.isNullOrEmpty() || size.value == 0.dp) FontWeight.SemiBold else FontWeight.Medium
             )
             DashboardShortSpace()
             Row(verticalAlignment = Alignment.CenterVertically) {
