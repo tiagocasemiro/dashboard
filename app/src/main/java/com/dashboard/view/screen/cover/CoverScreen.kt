@@ -34,9 +34,9 @@ fun CoverScreen(navController: NavController, stateArticles: State<CoverState>) 
         }
     ) {
         Column{
-            RowListText(listOf("Política", "Esporte", "Cinema", "Lazer", "Política", "Esporte","Cinema", "Lazer"))
             when(stateArticles.value) {
                 is CoverState.Data -> {
+                    RowListText((stateArticles.value as CoverState.Data).categories.map { it.name } )
                     CoverNews(stateArticles.value as CoverState.Data)
                 }
                 is CoverState.Empty -> {
