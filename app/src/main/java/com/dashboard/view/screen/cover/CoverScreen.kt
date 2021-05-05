@@ -23,7 +23,6 @@ import com.dashboard.view.components.*
 import com.dashboard.view.defaultPaddingCard
 import com.dashboard.view.defaultSpaceBetweenCard
 
-
 @Composable
 fun CoverScreen(navController: NavController, stateArticles: State<CoverState>) {
     Scaffold(
@@ -36,7 +35,7 @@ fun CoverScreen(navController: NavController, stateArticles: State<CoverState>) 
         Column{
             when(stateArticles.value) {
                 is CoverState.Data -> {
-                    RowListText((stateArticles.value as CoverState.Data).categories.map { it.name } )
+                    RowListText((stateArticles.value as CoverState.Data).categories.map { it.namePtBr } )
                     CoverNews(stateArticles.value as CoverState.Data)
                 }
                 is CoverState.Empty -> {
@@ -73,7 +72,7 @@ fun CoverNews(articleState: CoverState.Data) {
         }
         item {
             SourcesCard(articleState.sources)
-            DashboardSpace()
+            DashboardShortSpace()
             DashboardDivider()
         }
         itemsIndexed(articles) { index, article ->
