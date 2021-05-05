@@ -222,20 +222,9 @@ fun RowListSources(messages: List<String>) {
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),) {
             items(messages) { message ->
-                // todo Use chips android
-                //https://github.com/mitchtabian/MVVMRecipeApp/blob/chips/app/src/main/java/com/codingwithmitch/mvvmrecipeapp/presentation/components/FoodCategoryChip.kt
-                Text(
-                    text = message,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = firaSansFamily,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(color = Color.Black, shape = Shapes.medium)
-                        .padding(horizontal = 20.dp, vertical = 0.dp),
-                    color = Color.White,
-                    textAlign = TextAlign.Center
-                )
+                DashboardChip(message) {
+                    // todo on click
+                }
             }
         }
     }
