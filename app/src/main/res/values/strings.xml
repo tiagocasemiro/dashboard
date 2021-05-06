@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">Dashboard</string>
+    <string name="app_name">Dashboard \u0020</string>
 
-    <string name="search_screen_title">Search</string>
+    <string name="search_screen_title">Search \u0020 \u0020</string>
 
 
     <string name="content_description_back_button">Botão voltar</string>
+    <string name="content_description_no_button">Espaço em branco</string>
     <string name="content_description_search_button">Botão procurar</string>
+
 </resources>
