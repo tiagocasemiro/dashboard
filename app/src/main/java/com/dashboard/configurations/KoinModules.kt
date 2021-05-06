@@ -1,20 +1,21 @@
 package com.dashboard.configurations
 
 import androidx.lifecycle.viewModelScope
-import com.dashboard.BuildConfig
-import com.dashboard.model.usecase.MainPageUseCase
-import com.dashboard.repository.DashboardRemoteRepository
 import com.dashboard.repository.implementation.DashboardRemoteRepositoryImplementation
+import com.dashboard.repository.DashboardRemoteRepository
 import com.dashboard.repository.remote.DashboardGateway
+import com.dashboard.view.screen.search.SearchViewModel
 import com.dashboard.view.screen.cover.CoverViewModel
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.Response
+import com.dashboard.model.usecase.MainPageUseCase
+import com.dashboard.BuildConfig
 import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.OkHttpClient
+import okhttp3.Interceptor
+import okhttp3.Response
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
 var retrofitModule = module {
@@ -61,6 +62,17 @@ var viewModelModule = module {
         task.with(coverViewModel.viewModelScope)
 
         coverViewModel
+    }
+
+    viewModel {
+        val task = TaskExecutor()
+        val searchViewModel = SearchViewModel(
+            repository = get(),
+            task = task
+        )
+        task.with(searchViewModel.viewModelScope)
+
+        searchViewModel
     }
 }
 
