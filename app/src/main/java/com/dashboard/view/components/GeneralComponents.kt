@@ -21,7 +21,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.dashboard.R
 
-
 @Composable
 fun DashboardDivider() {
     Divider(color = colorResource(id = R.color.divider), thickness = 1.dp)
@@ -40,7 +39,6 @@ fun DashboardShortDot(){
         drawCircle(color = Color.Gray)
     })
 }
-
 
 @Composable
 fun DashboardThreeVerticalDot() {
@@ -91,7 +89,6 @@ fun DashboardCustomSpace(value: Dp) {
     Spacer(modifier = Modifier.size(value))
 }
 
-
 @Composable
 fun DashboardSpaceFullHorizontal(content: @Composable RowScope.() -> Unit) {
     Row(
@@ -104,7 +101,7 @@ fun DashboardSpaceFullHorizontal(content: @Composable RowScope.() -> Unit) {
 }
 
 @Composable
-fun DashboardChip(text: String, onExecuteSearch: (String) -> Unit){
+fun DashboardChip(text: String, onExecuteSearch: (String) -> Unit) {
     Surface(
         modifier = Modifier.padding(end = 8.dp),
         elevation = 8.dp,
@@ -134,8 +131,3 @@ fun DashboardChip(text: String, onExecuteSearch: (String) -> Unit){
         }
     }
 }
-
-
-
-
-
