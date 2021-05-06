@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -34,6 +35,7 @@ fun TopBarWithSearch(@StringRes title: Int, onSearch: () -> Unit) {
                 fontWeight = FontWeight.Bold
             )
         },
+        navigationIcon = { NoIcon() },
         actions = {
             IconButton(onClick = onSearch) {
                 Icon(
@@ -74,7 +76,15 @@ fun TopBarWithBack(@StringRes title: Int, onBack: () -> Unit) {
                 )
             }
         },
+        actions = { NoIcon() },
         elevation = 0.dp
     )
 }
 
+@Composable
+fun NoIcon() {
+    Icon(
+        painter = painterResource(id = R.drawable.ic_empty),
+        contentDescription = stringResource(id = R.string.content_description_no_button),
+    )
+}
