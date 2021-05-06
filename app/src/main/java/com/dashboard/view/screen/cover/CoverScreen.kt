@@ -42,7 +42,7 @@ fun CoverScreen(navController: NavController, stateArticles: State<CoverState>) 
                     CoverEmpty()
                 }
                 is CoverState.Error -> {
-                    PresentDialog()
+                    ErrorDialog("Ops, tivemos um problema","Erro ao tentar consultar Artigos. Tente novamente mais tarde.")
                 }
                 is CoverState.Load -> {
                     CoverLoad()
