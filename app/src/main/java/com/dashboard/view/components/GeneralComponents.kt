@@ -1,5 +1,7 @@
 package com.dashboard.view.components
 
+import com.dashboard.view.firaSansFamily
+import com.dashboard.view.Shapes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,8 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.dashboard.R
-
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -19,8 +19,7 @@ import androidx.compose.material.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.dashboard.view.firaSansFamily
-import com.dashboard.view.Shapes
+import com.dashboard.R
 
 
 @Composable
