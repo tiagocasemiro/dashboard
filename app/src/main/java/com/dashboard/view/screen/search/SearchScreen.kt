@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
 import com.dashboard.R
+import com.dashboard.view.components.DashboardTextField
 
 @Composable
 fun SearchScreen(navController: NavController, viewModel: SearchViewModel) {
@@ -23,7 +24,7 @@ fun SearchScreen(navController: NavController, viewModel: SearchViewModel) {
         }
     ) {
         Column {
-
+            DashboardTextField()
         }
     }
 }
