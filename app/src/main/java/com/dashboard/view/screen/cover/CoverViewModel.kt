@@ -15,7 +15,7 @@ class CoverViewModel(private val repository: DashboardRemoteRepository, private 
    private val _stateArticles = MutableLiveData<CoverState>()
    val stateArticles = _stateArticles as LiveData<CoverState>
 
-   fun articles() = task.exec {
+   fun articles() = task.launch {
        val result = task.async { repository.headlines() }
        val categories = task.async { repository.categories() }
        val sources = task.async { repository.sources() }
