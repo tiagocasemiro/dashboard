@@ -20,7 +20,7 @@ class TaskExecutor(private val handleException: HandleException? = null, private
         this.interceptor = interceptor
     }
 
-    fun exec(block: suspend () -> Unit) {
+    fun launch(block: suspend () -> Unit) {
         coroutineScope?.launch(Dispatchers.Main) {
             try {
                 block()
