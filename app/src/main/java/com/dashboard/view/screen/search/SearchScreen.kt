@@ -1,7 +1,10 @@
 package com.dashboard.view.screen.search
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import com.dashboard.view.components.TopBarWithBack
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -9,13 +12,11 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
 import com.dashboard.R
-import com.dashboard.view.components.DashboardTextField
-import com.dashboard.view.components.ErrorDialog
-import com.dashboard.view.components.RowListText
+import com.dashboard.view.components.*
+import com.dashboard.view.defaultPaddingCard
+import com.dashboard.view.defaultSpaceBetweenCard
 import com.dashboard.view.screen.cover.CoverEmpty
 import com.dashboard.view.screen.cover.CoverLoad
-import com.dashboard.view.screen.cover.CoverNews
-import com.dashboard.view.screen.cover.CoverState
 
 @Composable
 fun SearchScreen(navController: NavController, viewModel: SearchViewModel) {
@@ -37,8 +38,17 @@ fun SearchScreen(navController: NavController, viewModel: SearchViewModel) {
             DashboardTextField()
             when(stateArticles.value) {
                 is SearchState.Data -> {
-                    RowListText((stateArticles.value as CoverState.Data).categories.map { it.namePtBr } )
-                    CoverNews(stateArticles.value as CoverState.Data)
+                    val articles = (stateArticles.value as SearchState.Data).articles
+                    LazyColumn(
+                        contentPadding = PaddingValues(horizontal = defaultPaddingCard, vertical = defaultPaddingCard),
+                        verticalArrangement = Arrangement.spacedBy(defaultSpaceBetweenCard),
+                    ) {
+                        itemsIndexed(articles) { index, article ->
+                            SecondaryCardNews(article)
+                            if (index < articles.size - 1)
+                                DashboardDivider()
+                        }
+                    }
                 }
                 is SearchState.Empty -> {
                     CoverEmpty()
