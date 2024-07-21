@@ -375,3 +375,5 @@ Thumbs.db
 local.properties
 /.idea/.gitignore
 /.idea/runConfigurations.xml
+/.idea/migrations.xml
+/.idea/other.xml
