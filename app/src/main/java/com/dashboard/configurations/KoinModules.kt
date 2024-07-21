@@ -20,11 +20,13 @@ import java.util.concurrent.TimeUnit
 
 var retrofitModule = module {
     factory<Retrofit> {
-        val host = if(BuildConfig.DEBUG) {
+        /*val host = if(true) { // BuildConfig.DEBUG
             "https://sheltered-dawn-75915.herokuapp.com/"
         } else {
             "https://soccer-news-gatway.herokuapp.com/"
-        }
+        }*/
+        val host = "http://192.168.0.114:23567/"
+
         Retrofit.Builder()
             .baseUrl(host)
             .addConverterFactory(GsonConverterFactory.create())
@@ -41,7 +43,7 @@ var retrofitModule = module {
                         }
                     })
                     .hostnameVerifier { hostname, _ ->
-                        host.contains(hostname) || BuildConfig.DEBUG
+                        host.contains(hostname) || true //BuildConfig.DEBUG
                     }
                     .build()
             )

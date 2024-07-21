@@ -16,36 +16,36 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.SubcomposeAsyncImage
+import coil.request.ImageRequest
 import coil.transform.RoundedCornersTransformation
 import com.dashboard.model.domain.Article
 import com.dashboard.model.domain.Source
-import com.dashboard.view.Shapes
 import com.dashboard.view.dashboardPadding
 import com.dashboard.view.defaultPaddingCard
 import com.dashboard.view.firaSansFamily
-import com.google.accompanist.coil.CoilImage
-import com.dashboard.R
 
 @Composable
 fun MainCardNews(article: Article) {
     Column(
         Modifier.padding(dashboardPadding)
     ) {
-        CoilImage(
-            data = article.urlToImage?:"",
+        SubcomposeAsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(article.urlToImage?:"")
+                .crossfade(true)
+                .transformations(RoundedCornersTransformation(20f))
+                .build(),
             contentDescription = "Image from article",
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp),
             contentScale = ContentScale.Crop,
-            requestBuilder = {
-                transformations(RoundedCornersTransformation(20f))
-            },
             loading = {
                 Box(Modifier.matchParentSize()) {
                     Image(
@@ -64,7 +64,6 @@ fun MainCardNews(article: Article) {
                     )
                 }
             },
-            fadeIn = true
         )
         DashboardSpace()
         Text(
@@ -122,16 +121,17 @@ fun SecondaryCardNews(article: Article) {
     ) {
 
         article.urlToImage?.let {
-            CoilImage(
-                data = it,
+            SubcomposeAsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(it)
+                    .crossfade(true)
+                    .transformations(RoundedCornersTransformation(20f))
+                    .build(),
                 contentDescription = "Image from article",
                 modifier = Modifier
                     .height(size.value)
                     .width(size.value),
                 contentScale = ContentScale.Crop,
-                requestBuilder = {
-                    transformations(RoundedCornersTransformation(20f))
-                },
                 loading = {
                     Box(
                         Modifier
@@ -143,7 +143,6 @@ fun SecondaryCardNews(article: Article) {
                     size.value = 0.dp
                     Box(Modifier.wrapContentSize())
                 },
-                fadeIn = true
             )
         }
         DashboardCustomSpace(defaultPaddingCard)

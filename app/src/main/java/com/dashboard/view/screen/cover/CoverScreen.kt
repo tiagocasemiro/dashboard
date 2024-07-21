@@ -1,5 +1,6 @@
 package com.dashboard.view.screen.cover
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,12 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.compose.navigate
 import com.dashboard.R
 import com.dashboard.view.components.*
 import com.dashboard.view.defaultPaddingCard
 import com.dashboard.view.defaultSpaceBetweenCard
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CoverScreen(navController: NavController, stateArticles: State<CoverState>) {
     Scaffold(
