@@ -1,5 +1,6 @@
 package com.dashboard.view.screen.search
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,6 +18,7 @@ import com.dashboard.view.defaultSpaceBetweenCard
 import com.dashboard.view.screen.cover.CoverEmpty
 import com.dashboard.view.screen.cover.CoverLoad
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun SearchScreen(navController: NavController, viewModel: SearchViewModel) {
     val stateArticles: State<SearchState> = viewModel.stateArticles.observeAsState(SearchState.Empty)

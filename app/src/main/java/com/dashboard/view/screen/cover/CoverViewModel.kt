@@ -27,8 +27,8 @@ class CoverViewModel(private val repository: DashboardRemoteRepository, private 
                categories?.onSuccess { categoriesResult ->
                    sources?.onSuccess { sourcesResult ->
                        _stateArticles.value = CoverState.Data(
-                           articles = it.articles.map { // todo remover fixação de imagem
-                               it.copy(urlToImage = "https://c.biztoc.com/p/00b482ed96f72a78/s.webp")
+                           articles = it.articles.map {
+                               it //imagem fixada  .copy(urlToImage = "https://c.biztoc.com/p/00b482ed96f72a78/s.webp")
                            },
                            sourcesResult.sources,
                            categoriesResult.categories
